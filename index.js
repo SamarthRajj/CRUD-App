@@ -1,13 +1,21 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import { userRoutes } from './Routes/user.route.js';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
 // samarthraj756
 // AbNH1RmD5Uw9JsZ6
 const app = express();
 app.use(express.json());
 
 app.use("/api/user", userRoutes);
+app.use("/static", express.static('./static/'));
 
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+app.get('/', (req,res) => {
+    res.sendFile(join(__dirname, 'index.html'));
+});
 
 mongoose.connect('mongodb+srv://samarthraj756:AbNH1RmD5Uw9JsZ6@crud-app.4zl8vot.mongodb.net/?retryWrites=true&w=majority&appName=CRUD-App').then(() => {
     console.log('Connected to MongoDB');

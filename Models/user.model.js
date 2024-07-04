@@ -10,9 +10,9 @@ const userSchema = new mongoose.Schema(
             type: String,
             unique: true
         },
-        skills: {
-            type: Array,
-            default: []
+        rating: {
+            type: Number,
+            default: 0
         },
     },
     {
