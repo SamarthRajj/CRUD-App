@@ -3,8 +3,7 @@ import mongoose from 'mongoose';
 import { userRoutes } from './Routes/user.route.js';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
-// samarthraj756
-// AbNH1RmD5Uw9JsZ6
+
 const app = express();
 app.use(express.json());
 
