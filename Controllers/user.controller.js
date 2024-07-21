@@ -23,6 +23,31 @@ export const getAllUser = async (req, res) => {
     }
 }
 
+export const getUserByName = async (req, res) => {
+    // res.send('Request Recieved');
+    try {
+        // const id = req.params.id;
+        const users = await User.find({name: req.params.name});
+        res.status(200).json(users);
+        // console.log(user);
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+export const getUserByRating = async (req, res) => {
+    // res.send('Request Recieved');
+    try {
+        // const id = req.params.id;
+        const users = await User.find({rating: req.params.rating});
+        res.status(200).json(users);
+        // console.log(user);
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
 export const getUserById = async (req, res) => {
     // res.send('Request Recieved');
     try {

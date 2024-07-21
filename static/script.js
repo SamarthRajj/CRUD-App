@@ -17,7 +17,59 @@ const deleteOne = document.querySelector('.deleteOne');
 const para = document.querySelector('.para');
 const showUserButton = document.querySelector('.showAllUsers');
 const table = document.querySelector('.table');
-async function getUser() {
+const search = document.querySelector('.search');
+
+async function getUserByName(name){
+  try{
+    const response = await axios.get(`/api/user/${name}`);
+    console.log(response);
+    const data= response.data;
+    const table2 = document.querySelector('.table2');
+    const size = data.length;
+    table2.innerHTML = `<tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Rating</th>
+</tr>`
+    for (let i = 0; i < size; i++) {
+      table2.innerHTML += ` <tr>
+                            <td>${data[i].name}</td>
+                            <td>${data[i].email}</td>
+                            <td>${data[i].rating}</td>
+                            <td>${data[i]._id}</td>
+                          </tr>`
+    }
+  }
+  catch(error){
+    console.error(error);
+  }
+}
+async function getUserByRating(rating){
+  try{
+    const response = await axios.get(`/api/user/${rating}`);
+    console.log(response);
+    const data= response.data;
+    const table2 = document.querySelector('.table2');
+    const size = data.length;
+    table2.innerHTML = `<tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Rating</th>
+</tr>`
+    for (let i = 0; i < size; i++) {
+      table2.innerHTML += ` <tr>
+                            <td>${data[i].name}</td>
+                            <td>${data[i].email}</td>
+                            <td>${data[i].rating}</td>
+                            <td>${data[i]._id}</td>
+                          </tr>`
+    }
+  }
+  catch(error){
+    console.error(error);
+  }
+}
+async function getAllUser() {
   try {
     const response = await axios.get('/api/user');
     console.log(response);
@@ -67,7 +119,7 @@ form.addEventListener('submit', (e) => {
 });
 async function showAllUsers() {
   try {
-    const data = await getUser();
+    const data = await getAllUser();
     console.log(data);
     const size = data.length;
     table.innerHTML = `<tr>
@@ -94,7 +146,7 @@ async function showAllUsers() {
                               }
                             }
                             deleteUser('${data[i]._id}');
-                            table.deleteRow(${i+1});">Delete</button></td>
+                            table.deleteRow(${i + 1});">Delete</button></td>
                           </tr>`
     }
   } catch (error) {
@@ -102,9 +154,23 @@ async function showAllUsers() {
   }
 }
 //  deleteOne.addEventListener('click', () => {
-  //  const i = {id: 668677ca93004346b10e0105};
+//  const i = {id: 668677ca93004346b10e0105};
 //   deleteUser('66851c3ed3f4643af1c813c2');
 //  });
 showUserButton.addEventListener('click', () => {
   showAllUsers();
+});
+
+search.addEventListener('click', () => {
+  const searchBy = document.querySelector('.searchBy');
+  const searchValue = searchBy.value;
+  console.log(searchValue);
+  const searchText = document.querySelector('.searchText');
+  if(searchValue == "name"){
+    getUser(searchText.value);
+  }
+  else if(searchValue == "rating"){
+    console.log(searchText.value);
+    getUserByRating(searchText.value);
+  }
 });
