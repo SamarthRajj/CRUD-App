@@ -21,7 +21,32 @@ const search = document.querySelector('.search');
 
 async function getUserByName(name){
   try{
-    const response = await axios.get(`/api/user/${name}`);
+    const response = await axios.get(`/api/user/name/${name}`);
+    console.log(response);
+    const data= response.data;
+    const table2 = document.querySelector('.table2');
+    const size = data.length;
+    table2.innerHTML = `<tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Rating</th>
+</tr>`
+    for (let i = 0; i < size; i++) {
+      table2.innerHTML += ` <tr>
+                            <td>${data[i].name}</td>
+                            <td>${data[i].email}</td>
+                            <td>${data[i].rating}</td>
+                            <td>${data[i]._id}</td>
+                          </tr>`
+    }
+  }
+  catch(error){
+    console.error(error);
+  }
+}
+async function getUserByEmail(email){
+  try{
+    const response = await axios.get(`/api/user/email/${email}`);
     console.log(response);
     const data= response.data;
     const table2 = document.querySelector('.table2');
@@ -46,7 +71,7 @@ async function getUserByName(name){
 }
 async function getUserByRating(rating){
   try{
-    const response = await axios.get(`/api/user/${rating}`);
+    const response = await axios.get(`/api/user/rating/${rating}`);
     console.log(response);
     const data= response.data;
     const table2 = document.querySelector('.table2');
@@ -167,10 +192,14 @@ search.addEventListener('click', () => {
   console.log(searchValue);
   const searchText = document.querySelector('.searchText');
   if(searchValue == "name"){
-    getUser(searchText.value);
+    getUserByName(searchText.value);
   }
   else if(searchValue == "rating"){
     console.log(searchText.value);
     getUserByRating(searchText.value);
+  }
+  else if(searchValue == "email"){
+    console.log(searchText.value);
+    getUserByEmail(searchText.value);
   }
 });

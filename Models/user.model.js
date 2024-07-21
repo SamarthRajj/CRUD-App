@@ -8,10 +8,12 @@ const userSchema = new mongoose.Schema(
         },
         email: {
             type: String,
+            required: true,
             unique: true
         },
         rating: {
-            type: Number,
+            type: String,
+            required: true,
             default: 0
         },
     },
