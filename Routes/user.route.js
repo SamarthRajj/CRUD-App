@@ -4,12 +4,13 @@ const router = express.Router();
 
 
 router.get('/', getAllUser);
+router.get('/login/:email', getUserByEmail);
 router.get('/name/:name', getUserByName);
 router.get('/email/:email', getUserByEmail);
 router.get('/rating/:rating', getUserByRating);
-router.get('/:id', getUserById);
+router.get('/getUser/:id', getUserById);
 router.post('/', createUser);
-router.put('/:id', updateUser);
-router.delete('/:id', deleteUser);
+router.put('/updateUser/:id', updateUser);
+router.delete('/deleteUser/:id', deleteUser);
 
 export const userRoutes = router;

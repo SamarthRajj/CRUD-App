@@ -11,11 +11,12 @@ const userSchema = new mongoose.Schema(
             required: true,
             unique: true
         },
+        password: {
+            type: String,
+        },
         rating: {
             type: String,
-            required: true,
-            default: 0
-        },
+        }
     },
     {
         timestamps: true

@@ -106,7 +106,7 @@ async function getAllUser() {
 }
 async function deleteUser(id) {
   try {
-    const response = await axios.delete(`/api/user/${id}`);
+    const response = await axios.delete(`/api/user/deleteUser/${id}`);
     console.log(response);
     // return response.data;
     // para.innerTEXT = response.data;

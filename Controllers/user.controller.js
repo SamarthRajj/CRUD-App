@@ -1,5 +1,15 @@
 import { User } from '../Models/user.model.js';
 
+// export const checkPassword = async (req, res) => {
+//     try {
+//         const user = await User.findOne({email: req.params.email});
+//         res.status(200).json(user);
+//     }
+//     catch (err){
+//         console.log(err);
+//     }
+// }
+
 export const createUser = async (req, res) => {
     try {
         const user = await User.create(req.body);
@@ -28,7 +38,7 @@ export const getUserByName = async (req, res) => {
     try {
         // const id = req.params.id;
         console.log(req.params.name);
-        const users = await User.find({name: req.params.name});
+        const users = await User.find({name: {$regex: req.params.name, $options: 'i'}}).sort({name: 1}); 
         res.status(200).json(users);
         // console.log(user);
     }
