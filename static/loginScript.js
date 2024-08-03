@@ -10,6 +10,12 @@ async function checkUser(email, password){
         }
         if(user.data[0].password === password){
             console.log("here");
+            if(user.data[0].role === 'admin'){
+                alert('Admin Login Succesful');
+            }
+            else{
+                alert('User Login Succesful');
+            }
             return true;
         }
         else{

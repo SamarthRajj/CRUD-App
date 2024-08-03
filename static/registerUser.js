@@ -3,6 +3,7 @@ const user = {
     name: '',
     email: '',
     password: '',
+    role: '',
 }
 // function to match the password
 async function createUser(user) {
@@ -24,6 +25,8 @@ form.addEventListener('submit', (e) => {
     form.elements['email'].value = '';
     user.password = form.elements['password'].value;
     form.elements['password'].value = '';
+    user.role = form.elements['role'].value;
+    form.elements['role'].value = '';
     createUser(user);
     
 
